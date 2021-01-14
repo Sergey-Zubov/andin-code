@@ -33,9 +33,10 @@ class PostService(private val repository: PostRepository) {
                 )
             )
         )
-        .copy(content = dto.content)
         .let {
-            repository.save(it)
+            it.content = dto.content
+            if (it.id == 0L) repository.save(it)
+            it
         }.toDto()
 
     fun removeById(id: Long): Unit = repository.deleteById(id)

@@ -23,16 +23,21 @@ class PostService(private val repository: PostRepository) {
             .orElseThrow(::NotFoundException)
 
     fun save(dto: Post): Post = repository
-            .findById(dto.id)
-            .orElse(PostEntity.fromDto(dto.copy(
+        .findById(dto.id)
+        .orElse(
+            PostEntity.fromDto(
+                dto.copy(
                     likes = 0,
                     likedByMe = false,
-                    published = OffsetDateTime.now().toEpochSecond(),
-            )))
-            .copy(content = dto.content)
-            .let {
-                repository.save(it)
-            }.toDto()
+                    published = OffsetDateTime.now().toEpochSecond()
+                )
+            )
+        )
+        .let {
+            it.content = dto.content
+            if (it.id == 0L) repository.save(it)
+            it
+        }.toDto()
 
     fun removeById(id: Long): Unit = repository.deleteById(id)
 }

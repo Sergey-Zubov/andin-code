@@ -9,11 +9,11 @@ import javax.persistence.GenerationType
 @Entity
 data class PostEntity(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long,
-        val author: String,
-        val content: String,
-        val published: Long,
-        val likedByMe: Boolean,
-        val likes: Int = 0,
+        var author: String,
+        var content: String,
+        var published: Long,
+        var likedByMe: Boolean,
+        var likes: Int = 0,
 ) {
     fun toDto() = Post(id, author, content, published, likedByMe, likes)
 
