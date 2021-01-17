@@ -5,7 +5,7 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.service.PostService
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api/posts", "/api/slow/posts")
 class PostController(private val service: PostService) {
     @GetMapping
     fun getAll() = service.getAll()

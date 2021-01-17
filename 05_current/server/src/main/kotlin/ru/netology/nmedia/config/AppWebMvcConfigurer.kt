@@ -14,8 +14,7 @@ class AppWebMvcConfigurer : WebMvcConfigurer {
             override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
                 if (
                     request.requestURI.startsWith("/api/slow") ||
-                    request.requestURI.startsWith("/avatars") ||
-                    request.requestURI.startsWith("/images")
+                    request.requestURI.startsWith("/avatars")
                 ) {
                     Thread.sleep(5_000)
                 }
