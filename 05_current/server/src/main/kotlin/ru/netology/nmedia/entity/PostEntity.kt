@@ -10,7 +10,7 @@ import javax.persistence.GenerationType
 data class PostEntity(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long,
     var author: String,
-    val authorAvatar: String,
+    var authorAvatar: String,
     var content: String,
     var published: Long,
     var likedByMe: Boolean,
