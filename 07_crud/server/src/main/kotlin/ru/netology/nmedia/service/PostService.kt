@@ -27,8 +27,6 @@ class PostService(private val repository: PostRepository) {
         .orElse(
             PostEntity.fromDto(
                 dto.copy(
-                    author = "Netology",
-                    authorAvatar = "netology.jpg",
                     likes = 0,
                     likedByMe = false,
                     published = OffsetDateTime.now().toEpochSecond()
