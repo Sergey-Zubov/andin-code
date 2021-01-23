@@ -29,7 +29,7 @@ class PostRepositoryImpl: PostRepository {
 
         return client.newCall(request)
             .execute()
-            .use { it.body?.string() }
+            .let { it.body?.string() ?: throw RuntimeException("body is null") }
             .let {
                 gson.fromJson(it, typeToken.type)
             }
@@ -47,6 +47,7 @@ class PostRepositoryImpl: PostRepository {
 
         client.newCall(request)
             .execute()
+            .close()
     }
 
     override fun removeById(id: Long) {
@@ -57,5 +58,6 @@ class PostRepositoryImpl: PostRepository {
 
         client.newCall(request)
             .execute()
+            .close()
     }
 }

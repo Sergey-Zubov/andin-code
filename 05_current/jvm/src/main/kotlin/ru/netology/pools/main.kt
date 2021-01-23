@@ -21,7 +21,7 @@ fun main() {
     val postsRequest = Request.Builder().url("$baseUrl/api/posts").build()
     val posts: List<Post> = client.newCall(postsRequest)
         .execute()
-        .use { it.body?.string() }
+        .let { it.body?.string() ?: throw RuntimeException("body is null") }
         .let { gson.fromJson(it, typeToken.type) }
 
     val avatarsLoadTasks = posts.asSequence()
