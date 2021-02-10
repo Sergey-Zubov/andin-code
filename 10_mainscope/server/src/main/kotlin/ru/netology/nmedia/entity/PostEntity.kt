@@ -15,7 +15,7 @@ data class PostEntity(
     var published: Long,
     var likedByMe: Boolean,
     var likes: Int = 0,
-    @Embedded
+    @OneToOne(cascade = [CascadeType.ALL])
     var attachment: AttachmentEmbeddable?,
 ) {
     fun toDto() = Post(id, author, authorAvatar, content, published, likedByMe, likes, attachment?.toDto())
@@ -34,19 +34,20 @@ data class PostEntity(
     }
 }
 
-@Embeddable
+@Entity
 data class AttachmentEmbeddable(
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long,
     var url: String,
     @Column(columnDefinition = "TEXT")
     var description: String,
     @Enumerated(EnumType.STRING)
     var type: AttachmentType,
 ) {
-    fun toDto() = Attachment(url, description, type)
+    fun toDto() = Attachment(id, url, description, type)
 
     companion object {
         fun fromDto(dto: Attachment?) = dto?.let {
-            AttachmentEmbeddable(it.url, it.description, it.type)
+            AttachmentEmbeddable(it.id, it.url, it.description, it.type)
         }
     }
 }
