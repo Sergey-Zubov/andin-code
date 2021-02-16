@@ -1,6 +1,5 @@
 package ru.netology.nmedia.controller
 
-import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import ru.netology.nmedia.dto.Comment
 import ru.netology.nmedia.service.CommentService
