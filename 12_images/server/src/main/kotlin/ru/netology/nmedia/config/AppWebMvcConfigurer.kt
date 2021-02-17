@@ -32,7 +32,7 @@ class AppWebMvcConfigurer(@Value("\${app.media-location}") private val mediaLoca
 
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry
-            .addResourceHandler("/media/**")
+            .addResourceHandler("/**")
             .addResourceLocations(mediaLocation)
     }
 }

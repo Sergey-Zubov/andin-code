@@ -23,9 +23,8 @@ class NMediaApplication {
         commentService: CommentService,
         @Value("\${app.media-location}") mediaLocation: String,
     ) = CommandLineRunner {
-        val mediaPath = ResourceUtils.getFile(mediaLocation).toPath()
-        ResourceUtils.getFile("classpath:static/media/").copyRecursively(
-            mediaPath.toFile(),
+        ResourceUtils.getFile("classpath:static").copyRecursively(
+            ResourceUtils.getFile(mediaLocation),
             true,
         )
 
