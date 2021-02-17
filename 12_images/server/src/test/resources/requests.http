@@ -156,7 +156,7 @@ client.test("Request executed successfully", function() {
 
 ### Получение изображения
 
-GET http://localhost:9999/images/sbercard.jpg
+GET http://localhost:9999/media/sbercard.jpg
 
 > {%
 client.test("Request executed successfully", function() {

@@ -21,7 +21,7 @@ class AppWebMvcConfigurer(@Value("\${app.media-location}") private val mediaLoca
                 if (
                     request.requestURI.startsWith("/api/slow") ||
                     request.requestURI.startsWith("/avatars") ||
-                    request.requestURI.startsWith("/images")
+                    request.requestURI.startsWith("/media")
                 ) {
                     Thread.sleep(5_000)
                 }
