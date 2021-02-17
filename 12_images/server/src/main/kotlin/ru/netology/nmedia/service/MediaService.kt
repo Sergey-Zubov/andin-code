@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile
 import ru.netology.nmedia.dto.Media
 import ru.netology.nmedia.exception.BadContentTypeException
 import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.*
 
 @Service
@@ -20,15 +21,14 @@ class MediaService(@Value("\${app.media-location}") private val mediaLocation: S
         Files.createDirectories(path)
     }
 
-    fun save(file: MultipartFile): Media {
-
+    fun saveMedia(file: MultipartFile): Media {
         val mediaType: String = tika.detect(file.inputStream)
         val id = UUID.randomUUID().toString() + when(mediaType) {
             MimeTypeUtils.IMAGE_JPEG_VALUE -> ".jpg"
             MimeTypeUtils.IMAGE_PNG_VALUE -> ".png"
             else -> throw BadContentTypeException()
         }
-        file.transferTo(path.resolve(id))
+        file.transferTo(path.resolve(Paths.get("media", id)))
         return Media(id)
     }
 }

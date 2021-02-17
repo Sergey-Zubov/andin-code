@@ -11,5 +11,5 @@ import ru.netology.nmedia.service.MediaService
 @RequestMapping("/api/media", "/api/slow/media")
 class MediaController(private val service: MediaService) {
     @PostMapping
-    fun save(@RequestParam file: MultipartFile) = service.save(file)
+    fun save(@RequestParam file: MultipartFile) = service.saveMedia(file)
 }
